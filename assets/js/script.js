@@ -2,7 +2,8 @@ const API_KEY = "YJnxKn4mY_wXv94Oc5x9YetONQ8";
 const API_URL = "https://ci-jshint.herokuapp.com/api"; // this is so that we don't have to type the URL every time we need
 const resultsModal = new bootstrap.Modal(document.getElementById("resultsModal")) // Reference to our modal that allow the modal to be trigger by Bootsrap
 
-document.getElementById("status").addEventListener("click", e => getStatus(e)); // e is reference to the event
+document.getElementById("status").addEventListener("click", e => getStatus(e)); // e is reference to the event. This code wire up the check key button
+document.getElementById("submit").addEventListener("click", e => postForm(e));
 
 async function getStatus(e) {
     const queryString = `${API_URL}?api_key=${API_KEY}`;
@@ -26,9 +27,11 @@ function  displayStatus(data) {
     let heading = "API Key Status";
     let results = `<div>Your key is valid until</div>`;
     results += `<div class="key-status">${data.expiry}</div>`;
-    
+
     document.getElementById("resultsModalTitle").innerHTML = heading;
     document.getElementById("results-content").innerHTML = results;
 
     resultsModal.show();
 }
+
+
