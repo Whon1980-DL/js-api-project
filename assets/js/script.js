@@ -3,7 +3,18 @@ const API_URL = "https://ci-jshint.herokuapp.com/api"; // this is so that we don
 const resultsModal = new bootstrap.Modal(document.getElementById("resultsModal")) // Reference to our modal that allow the modal to be trigger by Bootsrap
 
 document.getElementById("status").addEventListener("click", e => getStatus(e)); // e is reference to the event. This code wire up the check key button
-document.getElementById("submit").addEventListener("click", e => postForm(e));
+document.getElementById("submit").addEventListener("click", e => postForm(e)); // wiring run check button to a code for post
+
+async function postForm(e) {
+    const form = new FormData(document.getElementById("checksform"));
+
+    for (let entry of form.entries()) { /* if you want to confirm  that the form has captured correctly. 
+        Then the formData object has several default  methods that allow us to manipulate the data. 
+        One of these, is the entries method. Which  we can iterate through to see the form entries.
+        */
+            console.log(entry);
+    }
+}
 
 async function getStatus(e) {
     const queryString = `${API_URL}?api_key=${API_KEY}`;
