@@ -1,4 +1,4 @@
-const API_KEY = "YJnxKn4mY_wXv94Oc5x9YetONQ8";
+const API_KEY = "YJnxKn4mY_wXv94Oc5x9YetONQ8123";
 const API_URL = "https://ci-jshint.herokuapp.com/api"; // this is so that we don't have to type the URL every time we need
 const resultsModal = new bootstrap.Modal(document.getElementById("resultsModal")) // Reference to our modal that allow the modal to be trigger by Bootsrap
 
@@ -6,7 +6,7 @@ document.getElementById("status").addEventListener("click", e => getStatus(e)); 
 document.getElementById("submit").addEventListener("click", e => postForm(e)); // wiring run check button to a code for post
 
 async function postForm(e) {
-    const form = new FormData(document.getElementById("checksform"));
+    const form = new FormData(document.getElementById("checksform")); // FormData is a form interface provided by Javascript to obtain data from form
     // This for loop is to test if the form is working
     //for (let entry of form.entries()) { 
         /* if you want to confirm  that the form has captured correctly. 
