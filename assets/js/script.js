@@ -7,7 +7,7 @@ document.getElementById("submit").addEventListener("click", e => postForm(e)); /
 
 async function postForm(e) {
     const form = new FormData(document.getElementById("checksform")); // FormData is a form interface provided by Javascript to obtain data from form
-    // This for loop is to test if the form is working
+    // This for loop is to test if the form is working using object.entry() method
     //for (let entry of form.entries()) { 
         /* if you want to confirm  that the form has captured correctly. 
         Then the formData object has several default  methods that allow us to manipulate the data. 
