@@ -40,7 +40,7 @@ function displayErrors(data) {
         results = `<div class="no_errors">No errors reported!</div>`
     } else {
         results = `<div>Total Errors: <span class="error_count">${data.total_errors}</span></div>`
-        for (let error of data.error_list) {
+        for (let error of data.error_list) { // iterate each object in the error_lsit
             results += `<div>At line <span class="line">${error.line}</span>, `;
             results += `column <span class="column">${error.col}</span></div>`;
             results += `<div class="error">${error.error}</div>`
