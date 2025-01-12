@@ -33,9 +33,11 @@ async function postForm(e) {
             //console.log(entry);
         // }
 
-    for (let entry of form.entries()) {
+    // The below is just a code to test to see how the form entry is displayed and to see if we submit the data in the correct format
+    /* for (let entry of form.entries()) {
         console.log(entry);
     }
+    */
 
     const response = await fetch(API_URL, { // As fecth() return a promise we need to use await
                     method: "POST", // method and header here are the second argument
@@ -50,8 +52,24 @@ async function postForm(e) {
     if (response.ok) {
          displayErrors(data);
     } else {
-        throw new Error(data.error)
+        displayException(data);
+        throw new Error(data.error); // throw key word is for throwing error to the console and after it is executed the script will stop running
     }
+}
+
+function displayException(data) {
+
+    let heading = `An Exception Occured`
+
+    let results = `<div class="status-code">The API returned status code ${data.status_code}</div>`;
+        results += `<div class="error-no">Error number: <strong>${data.error_no}</strong></div>`;
+        results += `<div class="error-text">Error text: <strong>${data.error}</strong></div>`;
+
+    document.getElementById("resultsModalTitle").innerHTML = heading;
+    document.getElementById("results-content").innerHTML = results;
+
+    resultsModal.show();
+
 }
 
 function displayErrors(data) {
@@ -72,7 +90,6 @@ function displayErrors(data) {
     document.getElementById("results-content").innerHTML = results;
 
     resultsModal.show();
-
 }
 
 async function getStatus(e) {
@@ -88,6 +105,7 @@ async function getStatus(e) {
         */
         displayStatus(data);
     } else {
+        displayException(data);
         throw new Error(data.error); // data.error is the descriptive message from the json that's been returned
     }
 }
