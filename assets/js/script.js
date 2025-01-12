@@ -1,12 +1,29 @@
-const API_KEY = "YJnxKn4mY_wXv94Oc5x9YetONQ8123";
+const API_KEY = "YJnxKn4mY_wXv94Oc5x9YetONQ8";
 const API_URL = "https://ci-jshint.herokuapp.com/api"; // this is so that we don't have to type the URL every time we need
 const resultsModal = new bootstrap.Modal(document.getElementById("resultsModal")) // Reference to our modal that allow the modal to be trigger by Bootsrap
 
 document.getElementById("status").addEventListener("click", e => getStatus(e)); // e is reference to the event. This code wire up the check key button
 document.getElementById("submit").addEventListener("click", e => postForm(e)); // wiring run check button to a code for post
 
+function processOptions(form) {
+
+    let optArray = [];
+
+    for (let entry of form.entries()) {
+        if (entry[0] === "options") { // If the first key = options then push the second value in each entry into the temp array 
+            optArray.push(entry[1])
+        }
+    }
+    form.delete("options");
+
+    form.append("options", optArray.join()); // join() method return an array as string. The join() method does not change the original array. Any separator can be specified. The default is comma (,).
+
+    return form;
+
+}
+
 async function postForm(e) {
-    const form = new FormData(document.getElementById("checksform")); // FormData is a form interface provided by Javascript to obtain data from form
+    const form = processOptions(new FormData(document.getElementById("checksform"))); // FormData is a form interface provided by Javascript to obtain data from form
     // This for loop is to test if the form is working using object.entry() method
     //for (let entry of form.entries()) { 
         /* if you want to confirm  that the form has captured correctly. 
@@ -15,6 +32,11 @@ async function postForm(e) {
         */
             //console.log(entry);
         // }
+
+    for (let entry of form.entries()) {
+        console.log(entry);
+    }
+
     const response = await fetch(API_URL, { // As fecth() return a promise we need to use await
                     method: "POST", // method and header here are the second argument
                     headers: {
